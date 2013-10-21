@@ -4,7 +4,7 @@
 # NB: PACKAGES is deprecated
 NAME = "ZenPacks.zenoss.CUC_CCMP"
 VERSION = "0.7.0"
-AUTHOR = ""
+AUTHOR = "Zenoss Professional Services"
 LICENSE = ""
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.zenoss']
 PACKAGES = ['ZenPacks', 'ZenPacks.zenoss', 'ZenPacks.zenoss.CUC_CCMP']
