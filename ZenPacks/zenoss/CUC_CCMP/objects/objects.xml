@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<objects>
+<!-- ('', 'zport', 'dmd', 'Devices', 'Network', 'Cisco', 'CiscoCCMP') -->
+<object id='/zport/dmd/Devices/Network/Cisco/CiscoCCMP' module='Products.ZenModel.DeviceClass' class='DeviceClass'>
+<property id='zendoc' type='string'>
+Unified Contact Center Management Portal
+</property>
+<property type="string" id="description" mode="w" >
+Unified Contact Center Management Portal
+</property>
+<property visible="True" type="lines" id="zCollectorPlugins" >
+['zenoss.snmp.NewDeviceMap', 'zenoss.snmp.DeviceMap', 'zenoss.snmp.CiscoMap', 'zenoss.snmp.InterfaceMap']
+</property>
+<property visible="True" type="boolean" id="zSnmpMonitorIgnore" >
+False
+</property>
+</object>
+<!-- ('', 'zport', 'dmd', 'Events', 'Status', 'CiscoCCMP') -->
+<object id='/zport/dmd/Events/Status/CiscoCCMP' module='Products.ZenEvents.EventClass' class='EventClass'>
+<tomanycont id='instances'>
+<object id='1.3.6.1.4.1.9.9.473.0.1' module='Products.ZenEvents.EventClassInst' class='EventClassInst'>
+<property type="text" id="transform" mode="w" >
+componentId = getattr(evt, '1.3.6.1.4.1.9.9.473.1.4.1', '')
+message = getattr(evt, '1.3.6.1.4.1.9.9.473.1.4.11', '')
+evt.message = message
+evt.summary = message
+hdsError = "HDS replication error"
+if message.find(hdsError) &gt;= 0:
+	evt.component = componentId + " " + hdsError
+	state = getattr(evt, '1.3.6.1.4.1.9.9.473.1.4.2', '')
+	if state == '0':
+		evt.severity = 0
+else:
+	evt.component = componentId
+</property>
+<property type="string" id="eventClassKey" mode="w" >
+1.3.6.1.4.1.9.9.473.0.1
+</property>
+<property type="int" id="sequence" mode="w" >
+7
+</property>
+<property type="string" id="regex" mode="w" >
+snmp trap 1.3.6.1.4.1.9.9.473.0.1
+</property>
+<property type="text" id="explanation" mode="w" >
+Replicating data from the logger HDS to a distributor AW Historical Data Server (HDS)
+</property>
+</object>
+</tomanycont>
+</object>
+</objects>
